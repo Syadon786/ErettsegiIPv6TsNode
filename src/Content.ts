@@ -1,6 +1,7 @@
 ﻿import fs from "fs";
 import http from "http";
 import url from "url";
+import Megoldás from "./Megoldás";
 
 interface InputInterface {
     name: string;
@@ -26,8 +27,10 @@ export default class Content {
         res.write("</head>");
         res.write("<body><form><pre>");
 
-        // Kezd a kódolást innen -->
-
+        //1. feladat ip.txt fájl beolvasása
+        const megold: Megoldás = new Megoldás("ip.txt");
+        //2. feladat
+        res.write(`2. feladat:\nAz állományban ${megold.címekSzáma} darab adatsor van.`);
         //  res.write(`3. feladat: Kérem a korod [0-99]: <input type='text' name='kor' value=${kor} style='width:3em;' onChange='this.form.submit();'>\n`);
 
         // <---- Fejezd be a kódolást

@@ -28,9 +28,13 @@ export default class Content {
         res.write("<body><form><pre>");
 
         //1. feladat ip.txt fájl beolvasása
-        const megold: Megoldás = new Megoldás("ip.txt");
+        const megoldás: Megoldás = new Megoldás("ip.txt");
         //2. feladat
-        res.write(`2. feladat:\nAz állományban ${megold.címekSzáma} darab adatsor van.`);
+        res.write(`2. feladat:\nAz állományban ${megoldás.címekSzáma} darab adatsor van.\n`);
+        //3. feladat
+        res.write(`\n3. feladat:\nA legalacsonyabban tárolt IP-cím:\n${megoldás.legalacsonyabbanTároltCím}\n`);
+        //4. feladat
+        res.write(`\n4. feladat:\nDokumentációs cím: ${megoldás.fajtaSzám[0]} darab\nGlobális egyedi cím: ${megoldás.fajtaSzám[1]} darab\nHelyi egyedi cím: ${megoldás.fajtaSzám[2]} darab`);
         //  res.write(`3. feladat: Kérem a korod [0-99]: <input type='text' name='kor' value=${kor} style='width:3em;' onChange='this.form.submit();'>\n`);
 
         // <---- Fejezd be a kódolást

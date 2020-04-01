@@ -2,7 +2,6 @@
 import http from "http";
 import url from "url";
 import Megoldás from "./Megoldás";
-import { runInNewContext } from "vm";
 
 interface InputInterface {
     name: string;

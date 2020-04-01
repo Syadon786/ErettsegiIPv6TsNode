@@ -60,7 +60,7 @@ export default class Megoldás {
         for (let sorSzám = 0; sorSzám < this._címek.length; sorSzám++) {
             const cím = this._címek[sorSzám];
             if (cím.nullákSzáma >= 18) {
-                ki.push((sorSzám + 1).toString() + " " + cím.eredetiCím);
+                ki.push((sorSzám + 1).toString() + "  " + cím.eredetiCím);
             }
         }
         fs.writeFileSync(állomány, ki.join("\r\n") + "\r\n");

@@ -15,6 +15,24 @@ export default class IPv6 {
         }
         return "Ismeretlen";
     }
+    public get bevezetőNullaElhagyás(): string {
+        const rövidítettCím: string[] = [];
+        for (const tag of this._tagok) {
+            let újTag = tag;
+            if (újTag[0] == "0" && újTag != "0000") {
+                while (újTag[0] == "0") {
+                    újTag = újTag.replace("0", "");
+                }
+                rövidítettCím.push(újTag);
+            } else if (újTag == "0000") {
+                újTag = "0";
+                rövidítettCím.push(újTag);
+            } else {
+                rövidítettCím.push(újTag);
+            }
+        }
+        return rövidítettCím.join(":");
+    }
     public get nullákSzáma(): number {
         let nullákSzáma = 0;
         for (const karakter of this.eredetiCím) {

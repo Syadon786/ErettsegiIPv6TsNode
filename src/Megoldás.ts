@@ -23,25 +23,20 @@ export default class Megoldás {
         return this._címek[sorszám - 1].eredetiCím;
     }
     public bevezetőNullaElhagyás(sorszám: number): string {
-        let rövidítettCím;
-        if (this._címek[sorszám - 1].eredetiCím.includes("0000")) {
-            rövidítettCím = this._címek[sorszám - 1].eredetiCím.replace(/0000/g, "0");
-            return rövidítettCím;
+        if (this._címek[sorszám - 1].bevezetőNullaElhagyás == this._címek[sorszám - 1].eredetiCím) {
+            return "Nem rövidíthető.";
         }
-        return "Nem rövidíthető";
+        return this._címek[sorszám - 1].bevezetőNullaElhagyás;
     }
     public nullásCsoportokRövidítése(sorszám: number): string {
-        let mégrövidítettebbCím: string = this.bevezetőNullaElhagyás(sorszám);
-        let rövidíthető = false;
-        while (mégrövidítettebbCím.includes(":0:0:")) {
-            mégrövidítettebbCím = mégrövidítettebbCím.replace(/:0:0:/g, "::");
-            rövidíthető = true;
-        }
-        while (mégrövidítettebbCím.includes(":::")) {
-            mégrövidítettebbCím = mégrövidítettebbCím.replace(/:::/g, "::");
-        }
-        if (rövidíthető) {
-            return mégrövidítettebbCím;
+        let mégrövidebbCím: string[] = [];
+        if (this._címek[sorszám - 1].bevezetőNullaElhagyás.includes(":0:0:0:")) {
+            mégrövidebbCím = this.bevezetőNullaElhagyás(sorszám).split(":0:0:0:");
+            if (mégrövidebbCím[1].includes("0:")) {
+                console.log("Itt vagyok");
+                mégrövidebbCím[1] = mégrövidebbCím[1].replace(/0:/g, "");
+            }
+            return mégrövidebbCím.join("::");
         }
         return "Nem rövidíthető tovább.";
     }

@@ -36,6 +36,10 @@ export default class Megoldás {
                 mégrövidebbCím[1] = mégrövidebbCím[1].replace("0:", "");
             }
             return mégrövidebbCím.join("::");
+        } else {
+            if (this._címek[sorszám - 1].bevezetőNullaElhagyás.includes(":0:0:")) {
+                return this._címek[sorszám - 1].bevezetőNullaElhagyás.replace(":0:0:", "::");
+            }
         }
         return "Nem rövidíthető tovább.";
     }

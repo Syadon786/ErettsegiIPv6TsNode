@@ -30,9 +30,10 @@ export default class Content {
 
         //1. feladat ip.txt fájl beolvasása
         const megoldás: Megoldás = new Megoldás("ip.txt");
+        res.write("1. feladat: Az ip.txt fájl beolvasása\n");
 
         //2. feladat
-        res.write(`2. feladat:\nAz állományban ${megoldás.címekSzáma} darab adatsor van.\n`);
+        res.write(`\n2. feladat:\nAz állományban ${megoldás.címekSzáma} darab adatsor van.\n`);
 
         //3. feladat
         res.write(`\n3. feladat:\nA legalacsonyabban tárolt IP-cím:\n${megoldás.legalacsonyabbanTároltCím}\n`);
@@ -57,6 +58,18 @@ export default class Content {
         //Nem a feladat része
         res.write("\n\n<u>GitHub repository:</u> ");
         res.write("<a href='https://github.com/Syadon786/ErettsegiIPv6TsNode/' target='_blank'>GitHub</a><br>");
+
+        res.write("\n\n<u>A sok.txt fájl:</u> (5. feladat)\n");
+        fs.readFileSync("sok.txt")
+            .toString()
+            .split("\n")
+            .forEach((i) => res.write(`${i.trim()}<br>`));
+
+        res.write("\n\n<u>A forrás ip.txt fájl:</u>\n");
+        fs.readFileSync("ip.txt")
+            .toString()
+            .split("\n")
+            .forEach((i) => res.write(`${i.trim()}<br>`));
 
         res.write("</pre></form></body></html>");
         res.end();

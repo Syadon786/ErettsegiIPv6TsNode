@@ -32,9 +32,8 @@ export default class Megoldás {
         let mégrövidebbCím: string[] = [];
         if (this._címek[sorszám - 1].bevezetőNullaElhagyás.includes(":0:0:0:")) {
             mégrövidebbCím = this.bevezetőNullaElhagyás(sorszám).split(":0:0:0:");
-            if (mégrövidebbCím[1].includes("0:")) {
-                console.log("Itt vagyok");
-                mégrövidebbCím[1] = mégrövidebbCím[1].replace(/0:/g, "");
+            while (mégrövidebbCím[1].startsWith("0:")) {
+                mégrövidebbCím[1] = mégrövidebbCím[1].replace("0:", "");
             }
             return mégrövidebbCím.join("::");
         }

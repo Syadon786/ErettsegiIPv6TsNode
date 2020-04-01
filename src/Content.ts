@@ -34,7 +34,7 @@ export default class Content {
         //3. feladat
         res.write(`\n3. feladat:\nA legalacsonyabban tárolt IP-cím:\n${megoldás.legalacsonyabbanTároltCím}\n`);
         //4. feladat
-        res.write(`\n4. feladat:\nDokumentációs cím: ${megoldás.fajtaSzám[0]} darab\nGlobális egyedi cím: ${megoldás.fajtaSzám[1]} darab\nHelyi egyedi cím: ${megoldás.fajtaSzám[2]} darab`);
+        res.write(`\n4. feladat:\nDokumentációs cím: ${megoldás.fajtaSzám("Dokumentációs")} darab\nGlobális egyedi cím: ${megoldás.fajtaSzám("Globális")} darab\nHelyi egyedi cím: ${megoldás.fajtaSzám("Helyi")} darab`);
         //  res.write(`3. feladat: Kérem a korod [0-99]: <input type='text' name='kor' value=${kor} style='width:3em;' onChange='this.form.submit();'>\n`);
 
         // <---- Fejezd be a kódolást

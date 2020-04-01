@@ -16,12 +16,8 @@ export default class Megoldás {
         }
         return legalacsonyabbanTároltCím;
     }
-    public get fajtaSzám(): number[] {
-        const fajtaSzám: number[] = [3];
-        fajtaSzám[0] = this._címek.filter((x) => x.fajta == "Dokumentációs").length;
-        fajtaSzám[1] = this._címek.filter((x) => x.fajta == "Globális").length;
-        fajtaSzám[2] = this._címek.filter((x) => x.fajta == "Helyi").length;
-        return fajtaSzám;
+    public fajtaSzám(fajta: string): number {
+        return this._címek.filter((x) => x.fajta == fajta).length;
     }
     constructor(forrás: string) {
         fs.readFileSync(forrás)

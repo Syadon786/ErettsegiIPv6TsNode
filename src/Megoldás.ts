@@ -30,4 +30,15 @@ export default class Megoldás {
                 }
             });
     }
+
+    public minTizennyolcNullátTartalmazÁllománybaÍr(állomány: string): void {
+        const ki: string[] = [];
+        for (let sorSzám = 0; sorSzám < this._címek.length; sorSzám++) {
+            const cím = this._címek[sorSzám];
+            if (cím.nullákSzáma >= 18) {
+                ki.push((sorSzám + 1).toString() + " " + cím.eredetiCím);
+            }
+        }
+        fs.writeFileSync(állomány, ki.join("\r\n") + "\r\n");
+    }
 }

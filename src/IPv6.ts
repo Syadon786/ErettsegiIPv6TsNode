@@ -15,7 +15,15 @@ export default class IPv6 {
         }
         return "Ismeretlen";
     }
-
+    public get nullákSzáma(): number {
+        let nullákSzáma = 0;
+        for (const karakter of this.eredetiCím) {
+            if (karakter == "0") {
+                nullákSzáma++;
+            }
+        }
+        return nullákSzáma;
+    }
     constructor(cím: string) {
         this._tagok = cím.split(":");
     }

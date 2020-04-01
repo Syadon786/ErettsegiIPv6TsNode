@@ -19,6 +19,32 @@ export default class Megoldás {
     public fajtaSzám(fajta: string): number {
         return this._címek.filter((x) => x.fajta == fajta).length;
     }
+    public sorszámadikCím(sorszám: number): string {
+        return this._címek[sorszám - 1].eredetiCím;
+    }
+    public bevezetőNullaElhagyás(sorszám: number): string {
+        let rövidítettCím;
+        if (this._címek[sorszám - 1].eredetiCím.includes("0000")) {
+            rövidítettCím = this._címek[sorszám - 1].eredetiCím.replace(/0000/g, "0");
+            return rövidítettCím;
+        }
+        return "Nem rövidíthető";
+    }
+    public nullásCsoportokRövidítése(sorszám: number): string {
+        let mégrövidítettebbCím: string = this.bevezetőNullaElhagyás(sorszám);
+        let rövidíthető = false;
+        while (mégrövidítettebbCím.includes(":0:0:")) {
+            mégrövidítettebbCím = mégrövidítettebbCím.replace(/:0:0:/g, "::");
+            rövidíthető = true;
+        }
+        while (mégrövidítettebbCím.includes(":::")) {
+            mégrövidítettebbCím = mégrövidítettebbCím.replace(/:::/g, "::");
+        }
+        if (rövidíthető) {
+            return mégrövidítettebbCím;
+        }
+        return "Nem rövidíthető tovább.";
+    }
     constructor(forrás: string) {
         fs.readFileSync(forrás)
             .toString()

@@ -2,6 +2,7 @@
 import http from "http";
 import url from "url";
 import Megoldás from "./Megoldás";
+import { runInNewContext } from "vm";
 
 interface InputInterface {
     name: string;
@@ -29,17 +30,33 @@ export default class Content {
 
         //1. feladat ip.txt fájl beolvasása
         const megoldás: Megoldás = new Megoldás("ip.txt");
+
         //2. feladat
         res.write(`2. feladat:\nAz állományban ${megoldás.címekSzáma} darab adatsor van.\n`);
+
         //3. feladat
         res.write(`\n3. feladat:\nA legalacsonyabban tárolt IP-cím:\n${megoldás.legalacsonyabbanTároltCím}\n`);
+
         //4. feladat
-        res.write(`\n4. feladat:\nDokumentációs cím: ${megoldás.fajtaSzám("Dokumentációs")} darab\nGlobális egyedi cím: ${megoldás.fajtaSzám("Globális")} darab\nHelyi egyedi cím: ${megoldás.fajtaSzám("Helyi")} darab`);
+        res.write(`\n4. feladat:\nDokumentációs cím: ${megoldás.fajtaSzám("Dokumentációs")} darab\nGlobális egyedi cím: ${megoldás.fajtaSzám("Globális")} darab\nHelyi egyedi cím: ${megoldás.fajtaSzám("Helyi")} darab\n`);
+
         //5. feladat
         megoldás.minTizennyolcNullátTartalmazÁllománybaÍr("sok.txt");
-        //  res.write(`3. feladat: Kérem a korod [0-99]: <input type='text' name='kor' value=${kor} style='width:3em;' onChange='this.form.submit();'>\n`);
 
-        // <---- Fejezd be a kódolást
+        //6. feladat
+        const u = url.parse(req.url as string, true).query;
+        let sorszám: number = parseInt(u.sorszam as string);
+        if (isNaN(sorszám) || sorszám < 1 || sorszám > megoldás.címekSzáma) sorszám = 10;
+        res.write(`\n6. feladat:\nKérek egy sorszámot: <input type='text' name='sorszam' min="0" value=${sorszám} style='width:3em;' onChange='this.form.submit();'>\n`);
+        res.write(`${megoldás.sorszámadikCím(sorszám)}\n`);
+        res.write(`${megoldás.bevezetőNullaElhagyás(sorszám)}\n`);
+
+        //7. feladat
+        res.write(`\n7. feladat:\n${megoldás.nullásCsoportokRövidítése(sorszám)}`);
+
+        //Nem a feladat része
+        res.write("\n\n<u>GitHub repository:</u> ");
+        res.write("<a href='https://github.com/Syadon786/ErettsegiIPv6TsNode/' target='_blank'>GitHub</a><br>");
 
         res.write("</pre></form></body></html>");
         res.end();
